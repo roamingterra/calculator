@@ -34,7 +34,7 @@ function divide(...args){
     return quotient;
 }
 
-//OPERATOR FUNCTION
+//OPERATOR FUNCTION: Envokes the appropriate math function based on the operator argument
 function operate(operator, num1, num2){
     let result;
     switch(operator){
