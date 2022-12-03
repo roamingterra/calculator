@@ -59,24 +59,30 @@ function operate(operator, num1, num2){
 //DISPLAY POPULATOR FUNCTIONS: Numbers are displayed when clicked
 
 //Link some html classes to JavaScript variables
+const display = document.querySelector('.display');
 const numbers = document.querySelectorAll('.num');
 const operators = document.querySelectorAll('.operator');
-const display = document.querySelector('.display');
+const equals = document.querySelector('.equals');
+const clear = document.querySelector('.clear');
+
+
 //Variable declarations
-let displayStorage;
 let data = {num1: 0, num2: undefined, operator: undefined};
+//display starting value
+display.textContent = 0;
 
 //Create a clicking event listener for number buttons
 numbers.forEach(number => {
     number.addEventListener('click', () => {
-        //If data.operator is undefined, add to num1
-
-        //If data.operator is not undefined, add to num2
-
-        //Add to display function
-        display.textContent += number.className.slice(4);
-        //Store what is being displayed in a variable
-        displayStorage = display.textContent;
+        //If display=0, replace display
+        if(display.textContent==='0'){
+            display.textContent = number.className.slice(4);
+        }
+        //Else if display!=0, add to display
+        else{
+            //Add to display
+             display.textContent += number.className.slice(4);
+        }
     })
 })
 
@@ -84,15 +90,51 @@ numbers.forEach(number => {
 operators.forEach(operator => {
     operator.addEventListener('click', () => {
         //If data.operator is undefined, add new operator to data
-        //Add operator to data
-        data.operator = operator.className.slice(9);
-
+        if(data.operator===undefined){
+            //Add operator to data
+            data.operator = operator.className.slice(9);
+            //Add what is displayed to num1
+            data.num1 = +display.textContent;
+        } 
         //If data.operator is not undefined, perform operation
-        //num1=value displayed
-        //operator= new entered operator
+        else if(data.operator!==undefined){
+            //Add what is displayed to num2
+            data.num2 = +display.textContent;
+            //Perform operation and display result 
+            display.textContent = operate(data.operator, data.num1, data.num2);
+            //Make result=num1
+            data.num1 = +display.textContent;
+            //Make num2=undefined
+            data.num2 = undefined;
+            //Replace old operator with new operator
+            data.operator = operator.className.slice(9);
+        }
     })
 })
 
+//Create a clicking event listener for the equals button
+equals.addEventListener('click', () => {
+    //If num1 is not undefined, operator is not undefined, and num2 is undefined,
+    //num2=num1
+    //operation performed between num1 and num2
+    //display result
+    //num1=displayed result
+    //num2=undefined
+
+    //If num1 is not undefined, operator is not undefined, and num2 is not undefined
+    //operation performed between num1 and num2
+    //display result
+    //num1=displayed result
+    //num2=undefined
+})
+
+//Create a clicking event for the clear button
+clear.addEventListener('click', () => {
+    display.textContent = 0;
+    data.num1 = 0;
+    data.num2 = undefined;
+    data.operator = undefined;
+})
 
 
 
