@@ -56,4 +56,44 @@ function operate(operator, num1, num2){
     return result;
 }
 
+//DISPLAY POPULATOR FUNCTIONS: Numbers are displayed when clicked
+
+//Link some html classes to JavaScript variables
+const numbers = document.querySelectorAll('.num');
+const operators = document.querySelectorAll('.operator');
+const display = document.querySelector('.display');
+//Variable declarations
+let displayStorage;
+let data = {num1: 0, num2: undefined, operator: undefined};
+
+//Create a clicking event listener for number buttons
+numbers.forEach(number => {
+    number.addEventListener('click', () => {
+        //If data.operator is undefined, add to num1
+
+        //If data.operator is not undefined, add to num2
+
+        //Add to display function
+        display.textContent += number.className.slice(4);
+        //Store what is being displayed in a variable
+        displayStorage = display.textContent;
+    })
+})
+
+//Create a clicking event listener for operator buttons
+operators.forEach(operator => {
+    operator.addEventListener('click', () => {
+        //If data.operator is undefined, add new operator to data
+        //Add operator to data
+        data.operator = operator.className.slice(9);
+
+        //If data.operator is not undefined, perform operation
+        //num1=value displayed
+        //operator= new entered operator
+    })
+})
+
+
+
+
 
