@@ -68,71 +68,81 @@ const clear = document.querySelector('.clear');
 
 //Variable declarations
 let data = {num1: 0, num2: undefined, operator: undefined};
-//display starting value
+let num2EnterBegin = true; //Boolean variable that will keep track of if num2 is beginning to be typed in or not
+
+//Display starting value
 display.textContent = 0;
 
-//Create a clicking event listener for number buttons
 numbers.forEach(number => {
     number.addEventListener('click', () => {
-        //If display=0, replace display
+        
         if(display.textContent==='0'){
+            //Replace initial zero in display with entered number
             display.textContent = number.className.slice(4);
         }
-        //Else if display!=0, add to display
         else{
-            //Add to display
-             display.textContent += number.className.slice(4);
+            if (data.operator===undefined && data.num2===undefined){
+                //Add to display for eventual num1 assignment
+                display.textContent += number.className.slice(4);
+            }
+            else if(data.operator!==undefined && data.num2===undefined && num2EnterBegin===true){
+                //Replace display with eventual num2 assignment
+                display.textContent = number.className.slice(4);
+                num2EnterBegin = false;
+            }
+            else if(data.operator!==undefined && data.num2===undefined && num2EnterBegin===false){
+                //Add to display for eventual num2 assignment
+                display.textContent += number.className.slice(4);
+            } 
         }
     })
 })
 
-//Create a clicking event listener for operator buttons
 operators.forEach(operator => {
     operator.addEventListener('click', () => {
-        //If data.operator is undefined, add new operator to data
         if(data.operator===undefined){
-            //Add operator to data
+            //Assign operator and assign num1 what is displayed on screen
             data.operator = operator.className.slice(9);
-            //Add what is displayed to num1
             data.num1 = +display.textContent;
         } 
-        //If data.operator is not undefined, perform operation
         else if(data.operator!==undefined){
-            //Add what is displayed to num2
+            //Perform operation if operator is already defined
             data.num2 = +display.textContent;
-            //Perform operation and display result 
             display.textContent = operate(data.operator, data.num1, data.num2);
-            //Make result=num1
             data.num1 = +display.textContent;
-            //Make num2=undefined
             data.num2 = undefined;
-            //Replace old operator with new operator
-            data.operator = operator.className.slice(9);
+            num2EnterBegin = true;
+            data.operator = operator.className.slice(9); //Replace old operator with new operator
         }
     })
 })
 
-//Create a clicking event listener for the equals button
 equals.addEventListener('click', () => {
-    //If num1 is not undefined, operator is not undefined, and num2 is undefined,
-    //num2=num1
-    //operation performed between num1 and num2
-    //display result
-    //num1=displayed result
-    //num2=undefined
-
-    //If num1 is not undefined, operator is not undefined, and num2 is not undefined
-    //operation performed between num1 and num2
-    //display result
-    //num1=displayed result
-    //num2=undefined
+    //Operation when equals is clicked when only num1 and operator are defined
+    if (data.num1!==undefined && data.operator!==undefined && data.num2===undefined){
+        data.num2 = +display.textContent;
+        display.textContent = operate(data.operator, data.num1, data.num2);
+        data.num1 = display.textContent;
+        data.num2 = undefined;
+        num2EnterBegin = true;
+        data.operator = undefined;
+    }
+   
+    //Operation when equals is clicked when all data is known
+    if (data.num1!==undefined && data.operator!==undefined && data.num2 !==undefined){
+        display.textContent = operate(data.operator, data.num1, data.num2);
+        data.num1 = display.textContent;
+        data.num2 = undefined;
+        num2EnterBegin = true;  
+        data.operator = undefined;
+    }
 })
 
-//Create a clicking event for the clear button
 clear.addEventListener('click', () => {
     display.textContent = 0;
     data.num1 = 0;
     data.num2 = undefined;
+    num2EnterBegin = true;
     data.operator = undefined;
 })
 
