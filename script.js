@@ -56,96 +56,97 @@ function operate(operator, num1, num2){
     return result;
 }
 
-//DISPLAY POPULATOR FUNCTIONS: Numbers are displayed when clicked
+//CALCULATE FUNCTION: This function allows the calculator to work
+function calculator(){
 
-//Link some html classes to JavaScript variables
-const display = document.querySelector('.display');
-const numbers = document.querySelectorAll('.num');
-const operators = document.querySelectorAll('.operator');
-const equals = document.querySelector('.equals');
-const clear = document.querySelector('.clear');
+    //Link some html classes to JavaScript variables
+    const display = document.querySelector('.display');
+    const numbers = document.querySelectorAll('.num');
+    const operators = document.querySelectorAll('.operator');
+    const equals = document.querySelector('.equals');
+    const clear = document.querySelector('.clear');
 
 
-//Variable declarations
-let data = {num1: 0, num2: undefined, operator: undefined};
-let num2EnterBegin = true; //Boolean variable that will keep track of if num2 is beginning to be typed in or not
+    //Variable declarations
+    let data = {num1: 0, num2: undefined, operator: undefined};
+    let num2EnterBegin = true; //Boolean variable that will keep track of if num2 is beginning to be typed in or not
 
-//Display starting value
-display.textContent = 0;
+    //Display starting value
+    display.textContent = 0;
 
-numbers.forEach(number => {
-    number.addEventListener('click', () => {
-        
-        if(display.textContent==='0'){
-            //Replace initial zero in display with entered number
-            display.textContent = number.className.slice(4);
-        }
-        else{
-            if (data.operator===undefined && data.num2===undefined){
-                //Add to display for eventual num1 assignment
-                display.textContent += number.className.slice(4);
-            }
-            else if(data.operator!==undefined && data.num2===undefined && num2EnterBegin===true){
-                //Replace display with eventual num2 assignment
+    numbers.forEach(number => {
+        number.addEventListener('click', () => {
+            
+            if(display.textContent==='0'){
+                //Replace initial zero in display with entered number
                 display.textContent = number.className.slice(4);
-                num2EnterBegin = false;
             }
-            else if(data.operator!==undefined && data.num2===undefined && num2EnterBegin===false){
-                //Add to display for eventual num2 assignment
-                display.textContent += number.className.slice(4);
-            } 
-        }
+            else{
+                if (data.operator===undefined && data.num2===undefined){
+                    //Add to display for eventual num1 assignment
+                    display.textContent += number.className.slice(4);
+                }
+                else if(data.operator!==undefined && data.num2===undefined && num2EnterBegin===true){
+                    //Replace display with eventual num2 assignment
+                    display.textContent = number.className.slice(4);
+                    num2EnterBegin = false;
+                }
+                else if(data.operator!==undefined && data.num2===undefined && num2EnterBegin===false){
+                    //Add to display for eventual num2 assignment
+                    display.textContent += number.className.slice(4);
+                } 
+            }
+        })
     })
-})
 
-operators.forEach(operator => {
-    operator.addEventListener('click', () => {
-        if(data.operator===undefined){
-            //Assign operator and assign num1 what is displayed on screen
-            data.operator = operator.className.slice(9);
-            data.num1 = +display.textContent;
-        } 
-        else if(data.operator!==undefined){
-            //Perform operation if operator is already defined
+    operators.forEach(operator => {
+        operator.addEventListener('click', () => {
+            if(data.operator===undefined){
+                //Assign operator and assign num1 what is displayed on screen
+                data.operator = operator.className.slice(9);
+                data.num1 = +display.textContent;
+            } 
+            else if(data.operator!==undefined){
+                //Perform operation if operator is already defined
+                data.num2 = +display.textContent;
+                display.textContent = operate(data.operator, data.num1, data.num2);
+                data.num1 = +display.textContent;
+                data.num2 = undefined;
+                num2EnterBegin = true;
+                data.operator = operator.className.slice(9); //Replace old operator with new operator
+            }
+        })
+    })
+
+    equals.addEventListener('click', () => {
+        //Operation when equals is clicked when only num1 and operator are defined
+        if (data.num1!==undefined && data.operator!==undefined && data.num2===undefined){
             data.num2 = +display.textContent;
             display.textContent = operate(data.operator, data.num1, data.num2);
-            data.num1 = +display.textContent;
+            data.num1 = display.textContent;
             data.num2 = undefined;
             num2EnterBegin = true;
-            data.operator = operator.className.slice(9); //Replace old operator with new operator
+            data.operator = undefined;
+        }
+    
+        //Operation when equals is clicked when all data is known
+        if (data.num1!==undefined && data.operator!==undefined && data.num2 !==undefined){
+            display.textContent = operate(data.operator, data.num1, data.num2);
+            data.num1 = display.textContent;
+            data.num2 = undefined;
+            num2EnterBegin = true;  
+            data.operator = undefined;
         }
     })
-})
 
-equals.addEventListener('click', () => {
-    //Operation when equals is clicked when only num1 and operator are defined
-    if (data.num1!==undefined && data.operator!==undefined && data.num2===undefined){
-        data.num2 = +display.textContent;
-        display.textContent = operate(data.operator, data.num1, data.num2);
-        data.num1 = display.textContent;
+    clear.addEventListener('click', () => {
+        display.textContent = 0;
+        data.num1 = 0;
         data.num2 = undefined;
         num2EnterBegin = true;
         data.operator = undefined;
-    }
-   
-    //Operation when equals is clicked when all data is known
-    if (data.num1!==undefined && data.operator!==undefined && data.num2 !==undefined){
-        display.textContent = operate(data.operator, data.num1, data.num2);
-        data.num1 = display.textContent;
-        data.num2 = undefined;
-        num2EnterBegin = true;  
-        data.operator = undefined;
-    }
-})
+    })
+}
 
-clear.addEventListener('click', () => {
-    display.textContent = 0;
-    data.num1 = 0;
-    data.num2 = undefined;
-    num2EnterBegin = true;
-    data.operator = undefined;
-})
-
-
-
-
+//ENVOKE CALCULATE FUNCTION
+calculator();
