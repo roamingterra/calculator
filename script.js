@@ -31,6 +31,9 @@ function divide(...args){
         }
         return accumulator / currentValue;
     }, 1)
+    if(quotient===Infinity){ //A number divided by zero actually isn't infinity. The answer of a number divided by an incredibly small number tends to infinity
+        return 'nice';
+    }
     return quotient;
 }
 
@@ -47,7 +50,7 @@ function operate(operator, num1, num2){
         case 'x':
             result = multiply(num1, num2);
             break;
-        case '/':
+        case '÷':
             result = divide(num1, num2);
             break;
         default:
@@ -74,6 +77,7 @@ function calculator(){
     //Display starting value
     display.textContent = 0;
 
+    //Event listeners
     numbers.forEach(number => {
         number.addEventListener('click', () => {
             
@@ -120,7 +124,8 @@ function calculator(){
 
     equals.addEventListener('click', () => {
         //Operation when equals is clicked when only num1 and operator are defined
-        if (data.num1!==undefined && data.operator!==undefined && data.num2===undefined){
+        if (data.num1!==undefined && data.operator!==undefined 
+            && data.num2===undefined){
             data.num2 = +display.textContent;
             display.textContent = operate(data.operator, data.num1, data.num2);
             data.num1 = display.textContent;
@@ -129,7 +134,7 @@ function calculator(){
             data.operator = undefined;
         }
     
-        //Operation when equals is clicked when all data is known
+        //Operation when equals is clicked when all data is known, and number displayed isn't 0
         if (data.num1!==undefined && data.operator!==undefined && data.num2 !==undefined){
             display.textContent = operate(data.operator, data.num1, data.num2);
             data.num1 = display.textContent;
@@ -148,5 +153,5 @@ function calculator(){
     })
 }
 
-//ENVOKE CALCULATE FUNCTION
+//INVOKE CALCULATE FUNCTION
 calculator();
