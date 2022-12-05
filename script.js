@@ -31,7 +31,9 @@ function divide(...args){
         }
         return accumulator / currentValue;
     }, 1)
-    if(quotient===Infinity){ //A number divided by zero actually isn't infinity. The answer of a number divided by an incredibly small number tends to infinity
+    if(quotient===Infinity){ //A number divided by zero actually isn't infinity. 
+                             //The answer of a number divided by an incredibly small number tends 
+                             //to infinity, but a number divided by zero is undefined
         return 'nice';
     }
     return quotient;
@@ -55,6 +57,13 @@ function operate(operator, num1, num2){
             break;
         default:
             result = 0;
+    }
+    const resultStr = String(result);
+    //Round result to maximum 7 decimal places
+    if(resultStr.includes('.')){
+        if (resultStr.split('.')[1].length>7){
+            return Math.round(result * 10000000)/10000000;
+        }
     }
     return result;
 }
