@@ -72,7 +72,7 @@ function operate(operator, num1, num2){
 function calculator(){
 
     //Link some html classes to JavaScript variables
-    const display = document.querySelector('.display');
+    const display = document.querySelector('.inner-display');
     const numbers = document.querySelectorAll('.num');
     const operators = document.querySelectorAll('.operator');
     const equals = document.querySelector('.equals');

@@ -6,31 +6,52 @@
     <title>Calculator</title>
 </head>
 <body>
-    <div class="display"></div>
-    <div class="row1">
-        <button class="num 7">7</button>
-        <button class="num 8">8</button>
-        <button class="num 9">9</button>
-        <button class="operator ÷">÷</button>
-    </div>
-    <div class="row2">
-        <button class="num 4">4</button>
-        <button class="num 5">5</button>
-        <button class="num 6">6</button>
-        <button class="operator x">x</button>
-    </div>
-    <div class="row3">
-        <button class="num 1">1</button>
-        <button class="num 2">2</button>
-        <button class="num 3">3</button>
-        <button class="operator -">-</button>
-    </div>
-    <div class="row4">
-        <button class="num 0">0</button>
-        <button class="clear">clear</button>
-        <button class="equals">=</button>
-        <button class="operator +">+</button>
+    <div id="box">
+        <div id="header">
+            <h1>Cyber Crunch</h1>
+            <h2>crunch numbers, do math</h2>
+        </div>
+        <div id="content">
+            <div class="calculator">
+                <div class="display">
+                    <div class="inner-display"></div>
+                </div>
+                <div class="row 1">
+                    <button class="clear">AC</button>
+                    <button class="change-sign">+/-</button>
+                    <button class="change-sign">%</button>
+                    <button class="operator ÷">÷</button>
+                </div>
+                <div class="row 2">
+                    <button class="num 7">7</button>
+                    <button class="num 8">8</button>
+                    <button class="num 9">9</button>
+                    <button class="operator x">x</button>
+                </div>
+                <div class="row 3">
+                    <button class="num 4">4</button>
+                    <button class="num 5">5</button>
+                    <button class="num 6">6</button>
+                    <button class="operator -">-</button>
+                </div>
+                <div class="row 4">
+                    <button class="num 1">1</button>
+                    <button class="num 2">2</button>
+                    <button class="num 3">3</button>
+                    <button class="operator +">+</button>
+                </div>
+                <div class="row 5">
+                    <button class="num 0">0</button>
+                    <button class="decimal">.</button>
+                    <button class="equals">=</button>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <div>Website created by Daniel Ballerini</div>
+            <div>With the help from © The Odin Project 2022</div>
+        </div>
     </div>
 </body>
-<script src="./script.js"></script>
 </html>
+<script src="./script.js"></script>
