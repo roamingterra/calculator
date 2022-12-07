@@ -58,26 +58,41 @@ function operate(operator, num1, num2){
         default:
             result = 0;
     }
-    const resultStr = String(result);
-    //Round result to maximum 7 decimal places
-    if(resultStr.includes('.')){
-        if (resultStr.split('.')[1].length>7){
-            return Math.round(result * 10000000)/10000000;
-        }
+    //Round result so that the length is max 9 decimal places ***Still needs to be worked on***
+    if(result.length>9){
+        result = String(result.toExponentiation());
+        return result
     }
-    return result;
+    result = String(result);
+    return result
+
+    /*
+    if(resultStr.includes('.')){
+        /*
+        if(resultStr.length>8){
+            return resultStr.toExponential()
+        }
+        */
+        /*
+        if (resultStr.split('.')[0].length>8){
+            return Math.round(result * 1000000000)/1000000000;
+        }
+    */
+    
+        
 }
 
 //CALCULATE FUNCTION: This function allows the calculator to work
 function calculator(){
 
     //Link some html classes to JavaScript variables
-    const display = document.querySelector('.inner-display');
+    const display = document.querySelector('.text');
+    const sign = document.querySelector('.sign');
     const numbers = document.querySelectorAll('.num');
     const operators = document.querySelectorAll('.operator');
     const equals = document.querySelector('.equals');
     const clear = document.querySelector('.clear');
-
+    const changeSign = document.querySelector('.change-sign');
 
     //Variable declarations
     let data = {num1: 0, num2: undefined, operator: undefined};
@@ -95,16 +110,19 @@ function calculator(){
                 display.textContent = number.className.slice(4);
             }
             else{
-                if (data.operator===undefined && data.num2===undefined){
+                if (data.operator===undefined && data.num2===undefined 
+                    && display.textContent.length<9){ //A max of 9 digits can be typed into the display
                     //Add to display for eventual num1 assignment
                     display.textContent += number.className.slice(4);
                 }
                 else if(data.operator!==undefined && data.num2===undefined && num2EnterBegin===true){
                     //Replace display with eventual num2 assignment
+                    sign.textContent = '';
                     display.textContent = number.className.slice(4);
                     num2EnterBegin = false;
                 }
-                else if(data.operator!==undefined && data.num2===undefined && num2EnterBegin===false){
+                else if(data.operator!==undefined && data.num2===undefined && num2EnterBegin===false 
+                    && display.textContent.length<9){ //A max of 9 digits can be typed into the display
                     //Add to display for eventual num2 assignment
                     display.textContent += number.className.slice(4);
                 } 
@@ -118,12 +136,27 @@ function calculator(){
                 //Assign operator and assign num1 what is displayed on screen
                 data.operator = operator.className.slice(9);
                 data.num1 = +display.textContent;
+                if(sign.textContent==='-'){
+                    data.num1 *= -1;
+                }
             } 
             else if(data.operator!==undefined){
                 //Perform operation if operator is already defined
                 data.num2 = +display.textContent;
+                if(sign.textContent==='-'){
+                    data.num2 *= -1;
+                }
                 display.textContent = operate(data.operator, data.num1, data.num2);
+                //if displayed answer is negative, remove negative from value and turn on negative button
                 data.num1 = +display.textContent;
+
+                if(Number(display.textContent)<0){
+                    display.textContent = display.textContent.slice(1);
+                }
+                else{
+                    sign.textContent = '';
+                }
+
                 data.num2 = undefined;
                 num2EnterBegin = true;
                 data.operator = operator.className.slice(9); //Replace old operator with new operator
@@ -136,7 +169,16 @@ function calculator(){
         if (data.num1!==undefined && data.operator!==undefined 
             && data.num2===undefined){
             data.num2 = +display.textContent;
+            if(sign.textContent==='-'){
+                data.num2 *= -1;
+            }
             display.textContent = operate(data.operator, data.num1, data.num2);
+            sign.textContent = '';
+            if(Number(display.textContent)<0){
+                //remove negative from displayed value and turn on negative button
+                display.textContent = display.textContent.slice(1);
+                sign.textContent = '-';
+            }
             data.num1 = display.textContent;
             data.num2 = undefined;
             num2EnterBegin = true;
@@ -159,6 +201,17 @@ function calculator(){
         data.num2 = undefined;
         num2EnterBegin = true;
         data.operator = undefined;
+        sign.textContent = '';
+    })
+
+    changeSign.addEventListener('click', () => {
+        if(sign.textContent==='' && display.textContent!=='0'){
+            sign.textContent = '-';  
+        }
+        else if(sign.textContent==='-' && display.textContent!=='0'){
+            sign.textContent = '';
+        }
+        
     })
 }
 

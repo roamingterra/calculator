@@ -46,7 +46,7 @@ h1, h2{
     border-style: solid;
     padding: 50px 20px 30px 20px;
     gap: 5px;
-    height: 500px;
+    height: 450px;
     border-radius: 10px;
     background-color:rgb(122,4,235);
 }
@@ -74,7 +74,7 @@ h1, h2{
 
 .inner-display{
     display: flex;
-    flex-grow: 0.9; /*This gives some space for width but not for height*/
+    flex-grow: 0.9; 
     justify-content: flex-end;
     align-items: center;
     border-style: solid;
@@ -85,8 +85,8 @@ h1, h2{
     background-color: black;
     border-color: white;
     color: white;
-
-    
+    max-width: 312.891px; /*Current width*/
+    letter-spacing: 12px;
 }
 
 .row button{ 
@@ -129,3 +129,57 @@ button:active{
     align-items: center;
     color: white;
 }
+
+/*Can't figure out this animation from https://www.youtube.com/watch?v=9CCkp_El1So*/
+/*
+.display .inner-display:hover:before,
+.display .inner-display:hover:after {
+  content: '0';
+  
+  position: relative;
+  top: 0px;
+  left: 0px;
+  
+}
+.display .inner-display:hover:before{
+  z-index: -2;
+  color: red;
+  animation: glitch 0.3s linear 6;
+}
+.display .inner-display:hover:after{
+  z-index: -2;
+  color: blue;
+  animation: glitch 0.3s linear 6 reverse;
+}
+@keyframes glitch {
+  0% {
+    top: 0; 
+    left: 0;
+  }
+  
+  20% {
+    top: -5px; 
+    left: -5px;
+  }
+
+  40% {
+    top: 5px; 
+    left: 5px;
+  }
+
+  60% {
+    top: -5px; 
+    left: 5px;
+  }
+
+  80% {
+    top: 5px; 
+    left: -5px;
+  }
+
+  100% {
+    top: 0; 
+    left: 0;
+  }
+}
+*/
