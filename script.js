@@ -101,7 +101,7 @@ function calculator(){
     const percentage = document.querySelector('.percentage');
 
     //Variable declarations
-    let data = {num1: 0, num2: undefined, operator: undefined};
+    let data = {num1: 0, num2: undefined, operator: undefined, justPerformedCalculation: false};
     let num2EnterBegin = true; //Boolean variable that will keep track of if num2 is beginning to be typed in or not
 
     //Display starting value
@@ -112,6 +112,10 @@ function calculator(){
         if(display.textContent==='0'){
             //Replace initial zero in display with entered number
             display.textContent = number; //number.className.slice(4);
+        }
+        else if(data.justPerformedCalculation===true){
+            display.textContent = number;
+            data.justPerformedCalculation = false;
         }
         else{
             if (data.operator===undefined && data.num2===undefined 
@@ -191,6 +195,7 @@ function calculator(){
            data.num2 = undefined;
            num2EnterBegin = true;
            data.operator = undefined;
+           data.justPerformedCalculation = true;
        }
    
        //Operation when equals is clicked when all data is known, and number displayed isn't 0
@@ -200,6 +205,7 @@ function calculator(){
            data.num2 = undefined;
            num2EnterBegin = true;  
            data.operator = undefined;
+           data.justPerformedCalculation = true;
        }
    }
 
@@ -237,6 +243,7 @@ function calculator(){
         num2EnterBegin = true;
         data.operator = undefined;
         sign.textContent = '';
+        data.justPerformedCalculation = false;
     }
 
     //Event listeners
