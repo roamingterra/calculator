@@ -204,7 +204,14 @@ function calculator(){
    }
 
    function percentageDo(){
-    display.textContent = Number(display.textContent) / 100;
+    let percentage = Number(display.textContent) / 100;
+    if(percentage.toString().includes('e')){
+        percentage = (percentage).toPrecision(2); //Round scientific notation to 2 digits
+    }
+    else if(percentage.toString().length>9){
+        percentage = Number(Number(percentage).toExponential()).toPrecision(2); //Round scientific notation to 2 digits
+    }
+    display.textContent = percentage; 
     }
 
     function decimalDo(){
@@ -268,7 +275,6 @@ function calculator(){
             equalsDo();
         }
         else if(e.key==="%"){
-            console.log('works');
             percentageDo();
         }
         else if(e.key==="."){
