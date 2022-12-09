@@ -17,17 +17,17 @@ body{
 #box{
     display: flex;
     flex-direction: column;
-    height: 100vh;
     align-items: center;
+    height: 100vh;
 }
 
 #header{
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: white;
     margin-top: 10px;
     margin-bottom: 10px;
+    color: white;
 }
 
 h1, h2{
@@ -50,8 +50,8 @@ h1, h2{
     gap: 5px;
     height: 450px;
     border-radius: 10px;
-    background-color:rgb(122,4,235);
     margin-bottom: 10px;
+    background-color:rgb(122,4,235);
 }
 
 .row{
@@ -64,8 +64,8 @@ h1, h2{
 .top{
     display: flex;
     flex-direction: row;
-    gap: 40px;
     align-items: center;
+    gap: 40px;
 }
 
 .logo{
@@ -78,63 +78,63 @@ h1, h2{
     flex-direction: row;
     width: 250px;
     height: 40px;
-    background-color: black;
     border-style: solid;
-    border-color: grey;
     border-radius: 5px;
     border-width: 0.05px;
+    background-color: black;
+    border-color: grey;
 }
 
 .section{
     display: flex;
     flex-grow: 1;
     border-style: solid;
-    border-color: gray;
     border-width: 0.05px;
+    border-color: gray;
 }
 
 .instructions{
     display: flex;
     justify-content: center;
-    color: white;
     font-size: small;
     background-color: black;
     padding: 10px;
     border-radius: 10px;
-    border-color: white;
     border-style: solid;
     margin-bottom: 10px;
+    color: white;
+    border-color: white;
 }
 
 .display{
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 100%;
     height: 1000px;
     border-style: solid;
-    justify-content: center;
     margin-bottom: 25px;
     margin-top: 5px;
-    font-size: xx-large;
     border-radius: 10px;
+    font-size: xx-large;
     background-color: rgb(255,0,160);
 }
 
 .inner-display{
     display: flex;
-    flex-grow: 0.9; 
     justify-content: flex-end;
     align-items: center;
+    flex-grow: 0.9; 
     border-style: solid;
     height: 50%;
     padding-right: 10px;
     border-radius: 10px;
     font-weight: bolder;
-    background-color: black;
-    border-color: white;
-    color: white;
     max-width: 312.891px; /*Current width*/
     letter-spacing: 12px;
+    background-color: black;
+    color: white;
+    border-color: white;
 }
 
 .row button{ 
@@ -167,7 +167,6 @@ button:active{
     background-color: rgb(240, 168, 186);
 }
 
-
 .row .equals{
     flex: 2.3 1 0;
 }
@@ -175,60 +174,6 @@ button:active{
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: white;
     margin-bottom: 10px;
+    color: white;
 }
-
-/*Can't figure out this animation from https://www.youtube.com/watch?v=9CCkp_El1So*/
-/*
-.display .inner-display:hover:before,
-.display .inner-display:hover:after {
-  content: '0';
-  
-  position: relative;
-  top: 0px;
-  left: 0px;
-  
-}
-.display .inner-display:hover:before{
-  z-index: -2;
-  color: red;
-  animation: glitch 0.3s linear 6;
-}
-.display .inner-display:hover:after{
-  z-index: -2;
-  color: blue;
-  animation: glitch 0.3s linear 6 reverse;
-}
-@keyframes glitch {
-  0% {
-    top: 0; 
-    left: 0;
-  }
-  
-  20% {
-    top: -5px; 
-    left: -5px;
-  }
-
-  40% {
-    top: 5px; 
-    left: 5px;
-  }
-
-  60% {
-    top: -5px; 
-    left: 5px;
-  }
-
-  80% {
-    top: 5px; 
-    left: -5px;
-  }
-
-  100% {
-    top: 0; 
-    left: 0;
-  }
-}
-*/

@@ -1,6 +1,8 @@
 # calculator
 Calculator that performs basic math operations
 
+Note: Flow diagram included in the folder of this project 
+
 General Flow:
 
 1.	A first number is typed in (num1 = 1) 
@@ -22,4 +24,65 @@ Expanded logic:
 2. Once an operator is selected, and a second number begins to be typed in, the display is then cleared of num1
 Once an operation is performed, the display is cleared, and then the display is filled with the answer of the operation
 
+Future considerations:
+
+1. UI buttons going through the pressing animation when the keyboard shortcut is pressed: 
+    I wasn't able to figure this out,
+    so I will leave this as a future potential improvement
+
+2. Add a glitch animation to the displayed result when a number is divided by 0: I was initially taking inspiration from the following youtube video: https://www.youtube.com/watch?v=9CCkp_El1So&t=204s. See bellow for my attempt at the code, which was presented as a hover effect. This will also be left as a future potential improvement.
+
+3. The operator functions that make use of reduce methods theoretically could take in an infinite number of arguments because they use the spread operator in the function parameters, when only two arguments can be sent to them at a time. This is not needed, however I decided to include this feature for practice purposes only. These function parameters in the future can be modified.
+
+//Glitch effect attempt
+.display .inner-display:hover:before,
+.display .inner-display:hover:after {
+  content: '0';
+  
+  position: relative;
+  top: 0px;
+  left: 0px;
+  
+}
+.display .inner-display:hover:before{
+  z-index: -2;
+  color: red;
+  animation: glitch 0.3s linear 6;
+}
+.display .inner-display:hover:after{
+  z-index: -2;
+  color: blue;
+  animation: glitch 0.3s linear 6 reverse;
+}
+@keyframes glitch {
+  0% {
+    top: 0; 
+    left: 0;
+  }
+  
+  20% {
+    top: -5px; 
+    left: -5px;
+  }
+
+  40% {
+    top: 5px; 
+    left: 5px;
+  }
+
+  60% {
+    top: -5px; 
+    left: 5px;
+  }
+
+  80% {
+    top: 5px; 
+    left: -5px;
+  }
+
+  100% {
+    top: 0; 
+    left: 0;
+  }
+}
 
