@@ -114,6 +114,7 @@ function calculator(){
             display.textContent = number; //number.className.slice(4);
         }
         else if(data.justPerformedCalculation===true){
+            sign.textContent = '';
             display.textContent = number;
             data.justPerformedCalculation = false;
         }
@@ -187,11 +188,14 @@ function calculator(){
            display.textContent = operate(data.operator, data.num1, data.num2);
            sign.textContent = '';
            if(Number(display.textContent)<0){
+                data.num1 = display.textContent;
                //remove negative from displayed value and turn on negative button
                display.textContent = display.textContent.slice(1);
                sign.textContent = '-';
            }
-           data.num1 = display.textContent;
+           else{
+               data.num1 = display.textContent;
+           }
            data.num2 = undefined;
            num2EnterBegin = true;
            data.operator = undefined;
